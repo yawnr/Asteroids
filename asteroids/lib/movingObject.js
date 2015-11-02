@@ -1,14 +1,15 @@
-function(root){
+(function(){
+
   var Asteroids = window.Asteroids = window.Asteroids || {};
 
-  var root.Asteroids.MovingObject = function(obj){
-    this.pos = obj[pos];
-    this.vel = obj[vel];
-    this.radius = obj[radius];
-    this.color = obj[color];
+  Asteroids.MovingObject = function(obj){
+    this.pos = obj["pos"];
+    this.vel = obj["vel"];
+    this.radius = obj["radius"];
+    this.color = obj["color"];
   };
 
-  root.Asteroids.draw = function(ctx){
+  Asteroids.MovingObject.prototype.draw = function(ctx){
     ctx.fillStyle = this.color;
     ctx.beginPath();
     ctx.arc(
@@ -22,11 +23,9 @@ function(root){
     ctx.fill();
   };
 
-  root.Asteroids.move = function () {
+  Asteroids.MovingObject.prototype.move = function () {
     this.pos[0] += this.vel[0];
     this.pos[1] += this.vel[1];
   };
 
-  
-
-}(this);
+})();
