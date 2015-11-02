@@ -1,3 +1,4 @@
+"use strict";
 var sum = function () {
   var sum = 0;
 
@@ -32,3 +33,27 @@ Function.prototype.myBind = function (context) {
 //
 // markov.says.myBind(breakfast, "WOOF")();
 // // Breakfast says meow!
+var curriedSum = function (numArgs) {
+  var numbers = [];
+  var _curriedSum = function(num){
+    numbers.push(num)
+    if (numbers.length === numArgs){
+      debugger
+      var finalSum = 0;
+      numbers.forEach(function(el) {
+        finalSum += el;
+
+      });
+      return finalSum;
+    }
+    else{
+      return _curriedSum;
+    }
+  };
+return _curriedSum;
+}
+// Function.prototype.curry = function(numArgs){
+//
+//
+//
+// }
