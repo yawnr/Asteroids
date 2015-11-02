@@ -51,6 +51,7 @@ var curriedSum = function (numArgs) {
   };
 return _curriedSum;
 }
+
 Function.prototype.curry = function(numArgs){
   var args = [];
   var fn = this;
