@@ -9,9 +9,10 @@
 
 Asteroids.GameView.prototype.start = function(){
   window.setInterval((function (){
-    game.moveObjects();
+    game.step();
     game.draw(this.ctx);
-  }.bind(this)),  20);
+    // game.wrap();
+  }.bind(this)),  5);
 };
 
 })();

@@ -4,16 +4,16 @@
 
   var Asteroids = window.Asteroids = window.Asteroids || {};
 
-  var COLOR = "black";
-  var RADIUS = 40;
+  var COLOR = "grey";
+  var RADIUS = 20;
 
   Asteroids.Asteroid = function (obj) {
-  // MovingObject(this);
 
   this.pos = obj["pos"];
   this.color = COLOR;
   this.radius = RADIUS;
-  this.vel = Asteroids.Util.randomVec(.1);
+  this.vel = Asteroids.Util.randomVec(1);
+  this.game = obj["game"];
 };
 
 // Asteroids.Asteroid.inherits(Asteroids.MovingObject);
