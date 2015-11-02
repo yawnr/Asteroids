@@ -1,9 +1,9 @@
 (function (root) {
 
   Asteroids.Util.inherits = function (ChildClass, ParentClass) {
-    var Placeholder = function() {};
-    Placeholder.prototype = ParentClass.prototype;
-    ChildClass.prototype = new Placeholder();
+    var Surrogate = function() {};
+    Surrogate.prototype = ParentClass.prototype;
+    ChildClass.prototype = new Surrogate();
   };
 
 })(this);
