@@ -4,7 +4,7 @@
 
   var DIM_X = 1200;
   var DIM_Y = 800;
-  var NUM_ASTEROIDS = 50;
+  var NUM_ASTEROIDS = 30;
 
   Asteroids.Game = function(){
     this.DIM_X = DIM_X;
@@ -12,6 +12,7 @@
     this.asteroids = [];
     this.addAsteroids();
     this.ship = new Asteroids.Ship(this.randomPosition());
+    this.allObjs = this.allObjects();
   };
 
   Asteroids.Game.prototype.addAsteroids = function(){
@@ -28,14 +29,14 @@
   Asteroids.Game.prototype.draw = function (ctx) {
     ctx.clearRect(0,0,DIM_X, DIM_Y);
 
-    this.allObjects.forEach(function(obj){
+    this.allObjs.forEach(function(obj){
       obj.draw(ctx);
     });
   };
 
   Asteroids.Game.prototype.moveObjects = function(){
 
-    this.allObjects.forEach(function(obj){
+    this.asteroids.forEach(function(obj){
       obj.move();
     });
 
@@ -62,12 +63,18 @@
   };
 
   Asteroids.Game.prototype.checkCollisions = function(){
-    for(var i = 0; i < this.allObjects.length - 1; i++){
-      for (var j = (i + 1); j < this.allObjects.length; j++){
-        if (this.allObjects[i].isCollidedWith(this.allObjects[j])) {
+    for(var i = 0; i < this.allObjs.length - 1; i++){
+      for (var j = (i + 1); j < this.allObjs.length; j++){
+        if (this.allObjs[i].isCollidedWith(this.allObjs[j])) {
           // alert("COLLISION");
-          this.remove(i);
-          this.remove(j-1);
+          if (this.allObjs[i] instanceof Asteroids.Ship || this.allObjs[j] instanceof Asteroids.Ship) {
+            this.ship.pos = this.randomPosition();
+          } else {
+          // this.remove(i);
+          // this.remove(j-1);
+          this.allObjs[i].vel = [-this.allObjs[i].vel[0], -this.allObjs[i].vel[1]];
+          this.allObjs[j].vel = [-this.allObjs[j].vel[0], -this.allObjs[j].vel[1]];
+        }
         }
       }
     }
@@ -87,7 +94,7 @@
   };
 
   Asteroids.Game.prototype.remove = function(idx){
-    this.allObjects.splice(idx, 1);
+    this.allObjs.splice(idx, 1);
   };
 
   Asteroids.Game.prototype.allObjects = function(){
